@@ -81,7 +81,7 @@ def execute_trading_strategy(model, data, window_size):
             reward = max(data[t] - bought_price, 0)
             total_profit += data[t] - bought_price
             sell_signals.append((t, data[t]))  # Record sell signal
-            print("Sell: " + priceFormat(data[t]) + " | Profit: " + priceFormat(data[t] - bought_price))
+            print("Sell: " + training.priceFormat(data[t]) + " | Profit: " + training.priceFormat(data[t] - bought_price))
 
         done = True if t == l - 1 else False
         memory.append((state, action, reward, next_state, done))
@@ -91,7 +91,7 @@ def execute_trading_strategy(model, data, window_size):
             print("################################")
             print(f"Total Profit: " + training.priceFormat(total_profit))
             print("################################")
-            print("Total profit is:", training.priceFormat(total_profit))
+            print("Total profit is:", priceFormat(total_profit))
 
     # Plotting the stock price with buy and sell signals
     plt.figure(figsize=(15, 5))
@@ -114,9 +114,9 @@ def execute_trading_strategy(model, data, window_size):
 # Initializes the trading model and executes the trading strategy on a specified stock.
 def main():
     stock_name = "data/AMZN"
-    model_name = "./saved_models/100.keras"
+    model_name = "./saved_models/50.keras"
     model, window_size = model_init_for_trading(model_name)
-    data = stockVector(stock_name)
+    data = training.stockVector(stock_name)
     print(data)
 
     total_profit = execute_trading_strategy(model, data, window_size)

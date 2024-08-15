@@ -11,14 +11,13 @@ from keras.models import Sequential, load_model
 from keras.layers import Dense
 from keras.optimizers import Adam
 
-
 gamma = 0.95
 epsilon = 1.0
 epsilon_min = 0.01
 epsilon_decay = 0.995
 episode_loss = 0
 
-actions = 3  # buy, sell, hold
+action_size = 3  # buy, sell, hold
 inv = []
 memory = deque(maxlen=1000)
 
@@ -108,7 +107,6 @@ def find_latest_checkpoint(model_dir):
     """
     checkpoint_files = [int(f.split('.')[0]) for f in os.listdir(model_dir) if f.endswith('.keras')]
     return max(checkpoint_files) if checkpoint_files else None
-
 def stockVector(key):
     """
     Reads stock data from a CSV file and extracts the closing prices.
@@ -173,7 +171,6 @@ def sigmoid(n):
     - sigmoid_value (float): The result of applying the sigmoid function to x.
     """
     return 1/(1+math.exp(-n))
-
 def train(stock_symbol, window_size, total_episodes, batch_size):
     """
     Trains a trading model on historical stock data.
