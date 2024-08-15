@@ -171,6 +171,7 @@ def sigmoid(n):
     - sigmoid_value (float): The result of applying the sigmoid function to x.
     """
     return 1/(1+math.exp(-n))
+
 def train(stock_symbol, window_size, total_episodes, batch_size):
     """
     Trains a trading model on historical stock data.
